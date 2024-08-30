@@ -15,7 +15,7 @@ The previous version had a very limited, text based UI. This new version is deve
 
 ## Project structure
 This project uses a structure that deviates from the standard Django structure, but for good reason. 
-The strcuture used and information about it can be found on [it's authors repository](https://github.com/Eyongkevin/django-boilerplate).
+The structure used and information about it can be found on it's [authors repository](https://github.com/Eyongkevin/django-boilerplate).
 
 #### Makefile
 In order to use the `Makefile` on a Windows OS, you can install `make` via the `chocolately` package manager.
@@ -24,7 +24,7 @@ In order to use the `Makefile` on a Windows OS, you can install `make` via the `
     `choco install make`
 
 #### A few hints to making the project structure work for you
-1. Make sure you install all dependencies from the requirements files inside the `requirements`folder.
+1. Make sure you install all dependencies from the requirements files inside the `requirements` folder.
 2. Update the Makefile and replace 'config' with the name of your project folder. (It's 'config' in the boilerplate)
 3. All apps go into the `apps`folder
 4. Inside each apps folder, you can find `apps.py`in which you need to add 'apps.' in front of the apps name so it says `name = 'apps.<app_name>'`

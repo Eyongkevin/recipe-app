@@ -1,41 +1,84 @@
-from django.test import TestCase
+from django.test import Client, TestCase
+from django.urls import reverse
 from .models import Recipe
 
-
-class RecipeModelTest(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        cls.recipe = Recipe.objects.create(
-            name="Tea",
-            ingredients="Tea Leaves, Water, Sugar",
-            cooking_time=4,
-            difficulty="Easy"
+class RecipeModelTests(TestCase):
+    def setUp(self):
+        self.recipe = Recipe.objects.create(
+            name="Test Recipe",
+            ingredients="ingredient1, ingredient2, ingredient3",
+            cooking_time=20,
+            directions="Test directions"
         )
-        
-    def test_recipe_creation(self):
-        #Test that a Recipe instance is created successfully.
-        self.assertEqual(self.recipe.name, "Tea")
-        self.assertEqual(self.recipe.ingredients, "Tea Leaves, Water, Sugar")
-        self.assertEqual(self.recipe.cooking_time, 4)
-        self.assertEqual(self.recipe.difficulty, "Easy")
 
-    def test_recipe_str_representation(self):
-        #Test the string representation of a Recipe instance.
-        self.assertEqual(str(self.recipe), f"Recipe ID: {self.recipe.id} - {self.recipe.name}")
+    def test_create_recipe(self):
+        self.assertEqual(Recipe.objects.count(), 1)
+        self.assertEqual(self.recipe.name, "Test Recipe")
 
-    def test_recipe_name_max_length(self):
-        #Test the max length of the name field.
-        max_length = self.recipe._meta.get_field('name').max_length
-        self.assertEqual(max_length, 50)
+    def test_return_ingredients_as_list(self):
+        ingredients = self.recipe.return_ingredients_as_list()
+        self.assertEqual(ingredients, ["ingredient1", "ingredient2", "ingredient3"])
 
-    def test_recipe_ingredients_max_length(self):
-        #Test the max length of the ingredients field.
-        max_length = self.recipe._meta.get_field('ingredients').max_length
-        self.assertEqual(max_length, 255)
+    def test_calculate_difficulty(self):
+        self.recipe.calculate_difficulty()
+        self.assertEqual(self.recipe.difficulty, "Intermediate")
 
-    def test_recipe_difficulty_max_length(self):
-        #Test the max length of the difficulty field.
-        max_length = self.recipe._meta.get_field('difficulty').max_length
-        self.assertEqual(max_length, 20)
+class RecipeListViewTests(TestCase):
+    def test_no_recipes(self):
+        response = self.client.get(reverse('home'))
+        self.assertContains(response, "There are no recipes in the database yet")
+        self.assertNotContains(response, "Recipe of the Day")
 
+    def test_recipes_list(self):
+        recipe = Recipe.objects.create(
+            name="Test Recipe",
+            ingredients="ingredient1, ingredient2, ingredient3",
+            cooking_time=20,
+            directions="Test directions"
+        )
+        response = self.client.get(reverse('recipe:recipe_list'))
+        self.assertContains(response, recipe.name)
+
+class RecipeDetailViewTests(TestCase):
+    def setUp(self):
+        self.recipe = Recipe.objects.create(
+            name="Test Recipe",
+            ingredients="ingredient1, ingredient2, ingredient3",
+            cooking_time=20,
+            directions="Test directions"
+        )
+
+    def test_valid_recipe(self):
+        response = self.client.get(reverse('recipe:recipe_detail', args=[self.recipe.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.recipe.name)
+
+    def test_invalid_recipe(self):
+        response = self.client.get(reverse('recipe:recipe_detail', args=[999]))
+        self.assertEqual(response.status_code, 404)
+
+class AddRecipeViewTests(TestCase):
+    def test_valid_form(self):
+        data = {
+            'name': 'Test Recipe',
+            'ingredients': 'ingredient1, ingredient2, ingredient3',
+            'cooking_time': 20,
+            'directions': 'Test directions'
+        }
+        response = self.client.post(reverse('recipe:add_recipe'), data)
+        self.assertRedirects(response, reverse('recipe:recipe_list'))
+        self.assertEqual(Recipe.objects.count(), 1)
+
+    def test_invalid_form(self):
+        data = {
+            'name': '',
+            'ingredients': '',
+            'cooking_time': -10,
+            'directions': ''
+        }
+        response = self.client.post(reverse('recipe:add_recipe'), data)
+        self.assertContains(response, 'name')
+        self.assertContains(response, 'ingredients')
+        self.assertContains(response, 'cooking_time')
+        self.assertContains(response, 'directions')
+        self.assertEqual(Recipe.objects.count(), 0)

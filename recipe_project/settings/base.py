@@ -12,7 +12,7 @@ DEFAULT_APP = [
 ]
 CREATED_APP = ['apps.recipes'] 
 
-THIRD_PARTY_APP = []  # third party apps go here
+THIRD_PARTY_APP = ['markdownx','markdownify']  # third party apps go here
 
 INSTALLED_APPS = [*DEFAULT_APP, *CREATED_APP, *THIRD_PARTY_APP]
 
@@ -31,7 +31,10 @@ ROOT_URLCONF = "recipe_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            str(BASE_DIR / 'apps' / 'core' / 'templates'),
+            str(BASE_DIR / 'apps' / 'recipes' / 'templates')
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -71,5 +74,20 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [str(BASE_DIR / "static")]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+MARKDOWNIFY = {
+    'default': {
+        'WHITELIST_TAGS': ['h1','h2','h3','h4','a', 'p', 'strong', 'em', 'ol', 'ul', 'li', 'code', 'pre', 'blockquote'],
+        'WHITELIST_ATTRS': {'*': ['class'], 'a': ['href', 'target']},
+        'MARKDOWN_EXTENSIONS': [
+            'markdown.extensions.extra',  # Includes list support
+            'markdown.extensions.codehilite',
+        ],
+        'STRIP': False,
+    }
+}
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

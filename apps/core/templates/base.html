@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Django Website{% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
@@ -22,6 +22,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <!-- Check if the user is logged in -->
+                    {% if user.is_authenticated %}
+                        <!-- If logged in, show logout link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    
+                        {% else %}
+                        <!-- If not logged in, show login link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item d-flex align-items-center mx-2">
                         <a class="nav-link" href="{% url 'recipe:recipe_list' %}">All Recipes</a>
                     </li>

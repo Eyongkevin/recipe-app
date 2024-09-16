@@ -3,34 +3,35 @@
 {% block title %}Recipes{% endblock %}
 
 {% block content %}
-<div class="container">
-          
-    <h1 class="display-4 mt-3 mb-4">Recipes</h1>
+    <h1 class="display-4 mt-5 mb-4">Recipes</h1>
 
-    {% for recipe in recipes %}
-    <div class="row mb-2 pb-2 border-bottom"> 
+    <div class="flex-grow-1">
+        {% for recipe in recipes %}
+        <div class="row py-3 border-bottom align-items-start">
+            <div class="col-12 col-sm-4 col-md-3 pb-sm-0 pb-2">
+                <a href="{% url 'recipe:recipe_detail' recipe.pk %}" >
+                    <img src="{{ recipe.image.url }}" class="img-fluid rounded shadow w-100" alt="{{ recipe.name }}">
+                </a>
+            </div>
     
-        <div class="col-auto"> 
-            <a href="{% url 'recipe:recipe_detail' recipe.pk %}">
-                <img src="{{ recipe.image.url }}" class="img-fluid rounded shadow" 
-                 style="object-fit: cover; height: 100%; max-width: 200px;" alt="{{ recipe.name }}">
-            </a>
+            <div class="col-12 col-sm px-sm-3 ">          
+                <a href="{% url 'recipe:recipe_detail' recipe.pk %}" class="link-underline link-underline-opacity-0">
+                    <h2 class="fs-2">{{ recipe.name }}</h2>
+                </a>       
+                <p class="my-2"><strong>Cooking Time:</strong> {{ recipe.cooking_time }} minutes</p>
+                <p class="my-2"><strong>Difficulty:</strong> 
+                    <button type="button" class="btn {{ recipe.difficulty|style_difficulty }} disabled py-0 px-1">{{ recipe.difficulty }}</button>
+                </p>
+            </div>
         </div>
-      
-        <div class="col ps-3"> 
-            <a href="{% url 'recipe:recipe_detail' recipe.pk %}" class="link-underline link-underline-opacity-0">
-                <h2 class="display-6">{{ recipe.name }}</h2>
-            </a>
-            <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
-            <p><strong>Cooking Time:</strong> {{ recipe.cooking_time }} minutes</p>
-            <p><strong>Difficulty:</strong> 
-                <button type="button" class="btn {{ recipe.difficulty|style_difficulty }} disabled py-0 px-1">{{ recipe.difficulty }}</button>
-            </p>
-        </div>
+        {% empty %}
+            No recipes found.
+        {% endfor %}
     </div>
-    {% empty %}
-        No recipes found.
-    {% endfor %}      
-</div>
+    
+{% endblock %}
 
+<!-- Pagination -->
+{% block pagination %}
+    {% include 'recipes/pagination.html' %}
 {% endblock %}

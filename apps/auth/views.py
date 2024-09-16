@@ -10,7 +10,7 @@ def login_view(request):
 
     if request.method == 'POST':       
         #read the data sent by the form via POST request                   
-        form =AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(data=request.POST)
 
         #check if form is valid
         if form.is_valid():                                
@@ -23,13 +23,11 @@ def login_view(request):
             if user is not None:
                 login(request, user)                
                 return redirect('profile') #& send the user to desired page
-        else:                                               #in case of error
-            error_message ='ooops.. something went wrong'   #print error message
-
+       
     #prepare data to send from view to template
     context ={                                             
         'form': form,                                 #send the form data
-        'error_message': error_message                #and the error_message
+        'error_message': form.errors.get('__all__')                #and the error_message
     }
 
     #load the login page using "context" information

@@ -1,6 +1,8 @@
 from pathlib import Path
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 
 DEFAULT_APP = [
     "django.contrib.admin",
@@ -12,7 +14,7 @@ DEFAULT_APP = [
 ]
 CREATED_APP = ['apps.recipes', 'apps.auth'] 
 
-THIRD_PARTY_APP = ['markdownx','markdownify']  # third party apps go here
+THIRD_PARTY_APP = ['markdownx','markdownify', ]  # third party apps go here
 
 INSTALLED_APPS = [*DEFAULT_APP, *CREATED_APP, *THIRD_PARTY_APP]
 
@@ -80,8 +82,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MARKDOWNIFY = {
     'default': {
-        'WHITELIST_TAGS': ['h1','h2','h3','h4','a', 'p', 'strong', 'em', 'ol', 'ul', 'li', 'code', 'pre', 'blockquote'],
-        'WHITELIST_ATTRS': {'*': ['class'], 'a': ['href', 'target']},
+        'WHITELIST_TAGS': ['h1','h2','h3','h4','a', 'p', 'strong', 'em', 'ol', 'ul', 'li', 'code', 'pre', 'blockquote', 'img'],
+        'WHITELIST_ATTRS': {'*': ['class'], 'a': ['href', 'target'], 'img':['src']},
         'MARKDOWN_EXTENSIONS': [
             'markdown.extensions.extra',  # Includes list support
             'markdown.extensions.codehilite',
@@ -89,6 +91,7 @@ MARKDOWNIFY = {
         'STRIP': False,
     }
 }
+
 LOGIN_URL='/login/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

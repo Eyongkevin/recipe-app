@@ -1,0 +1,167 @@
+Auflistung der Ordnerpfade fÅr Volume System
+Volumeseriennummer : CE48-851A
+C:.
+|   .env
+|   .gitignore
+|   db.sqlite3
+|   Makefile
+|   manage.py
+|   project_structure.txt
+|   
++---.vscode
+|       settings.json
+|       
++---apps
+|   +---auth
+|   |   |   admin.py
+|   |   |   apps.py
+|   |   |   models.py
+|   |   |   test_auth.py
+|   |   |   views.py
+|   |   |   __init__.py
+|   |   |   
+|   |   +---migrations
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           __init__.cpython-38.pyc
+|   |   |           
+|   |   +---templates
+|   |   |       login.html
+|   |   |       success.html
+|   |   |       user_profile.html
+|   |   |       
+|   |   \---__pycache__
+|   |           admin.cpython-38.pyc
+|   |           apps.cpython-38.pyc
+|   |           models.cpython-38.pyc
+|   |           views.cpython-38.pyc
+|   |           __init__.cpython-38.pyc
+|   |           
+|   +---core
+|   |   |   admin.py
+|   |   |   apps.py
+|   |   |   models.py
+|   |   |   tests.py
+|   |   |   views.py
+|   |   |   __init__.py
+|   |   |   
+|   |   +---migrations
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           __init__.cpython-38.pyc
+|   |   |           
+|   |   +---templates
+|   |   |       base.html
+|   |   |       
+|   |   \---__pycache__
+|   |           tests.cpython-38.pyc
+|   |           views.cpython-38.pyc
+|   |           __init__.cpython-38.pyc
+|   |           
+|   +---recipes
+|   |   |   admin.py
+|   |   |   apps.py
+|   |   |   forms.py
+|   |   |   models.py
+|   |   |   urls.py
+|   |   |   utils.py
+|   |   |   views.py
+|   |   |   __init__.py
+|   |   |   
+|   |   +---migrations
+|   |   |   |   0001_initial.py
+|   |   |   |   0002_recipe_description.py
+|   |   |   |   0003_recipe_image.py
+|   |   |   |   0004_alter_recipe_description.py
+|   |   |   |   0005_rename_description_recipe_directions.py
+|   |   |   |   0006_alter_recipe_difficulty.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           0001_initial.cpython-38.pyc
+|   |   |           0002_recipe_description.cpython-38.pyc
+|   |   |           0003_recipe_image.cpython-38.pyc
+|   |   |           0004_alter_recipe_description.cpython-38.pyc
+|   |   |           0005_rename_description_recipe_directions.cpython-38.pyc
+|   |   |           0006_alter_recipe_difficulty.cpython-38.pyc
+|   |   |           __init__.cpython-38.pyc
+|   |   |           
+|   |   +---templates
+|   |   |   \---recipes
+|   |   |           add_recipe.html
+|   |   |           add_recipe_modal.html
+|   |   |           pagination.html
+|   |   |           recipes_home.html
+|   |   |           recipe_charts.html
+|   |   |           recipe_detail.html
+|   |   |           recipe_list.html
+|   |   |           search.html
+|   |   |           
+|   |   +---templatetags
+|   |   |   |   recipe_filters.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           recipe_filters.cpython-38.pyc
+|   |   |           split_ingredients.cpython-38.pyc
+|   |   |           __init__.cpython-38.pyc
+|   |   |           
+|   |   +---tests
+|   |   |       tests_models.py
+|   |   |       test_forms.py
+|   |   |       test_urls.py
+|   |   |       test_views.py
+|   |   |       
+|   |   \---__pycache__
+|   |           admin.cpython-38.pyc
+|   |           apps.cpython-38.pyc
+|   |           forms.cpython-38.pyc
+|   |           models.cpython-38.pyc
+|   |           urls.cpython-38.pyc
+|   |           utils.cpython-38.pyc
+|   |           views.cpython-38.pyc
+|   |           __init__.cpython-38.pyc
+|   |           
+|   \---__pycache__
+|           __init__.cpython-38.pyc
+|           
++---media
+|   |   no_picture.jpg
+|   |   
+|   \---recipe_images
+|           cappuccino.png
+|           Kentucky-Butter-Cake_FT24_37065_EC_050824_9.jpg
+|           schnitzel.jpg
+|           Spaghetti.jpg
+|           tea.jpg
+|           
++---recipe_project
+|   |   asgi.py
+|   |   urls.py
+|   |   wsgi.py
+|   |   
+|   +---settings
+|   |   |   base.py
+|   |   |   dev.py
+|   |   |   
+|   |   \---__pycache__
+|   |           base.cpython-38.pyc
+|   |           dev.cpython-38.pyc
+|   |           __init__.cpython-38.pyc
+|   |           
+|   \---__pycache__
+|           urls.cpython-38.pyc
+|           wsgi.cpython-38.pyc
+|           __init__.cpython-38.pyc
+|           
++---requirements
+|       base.txt
+|       dev.txt
+|       
+\---static
+    \---css
+            bootstrap.min.css
+            bootstrap_quarz.min.css
+            custom.css
+            

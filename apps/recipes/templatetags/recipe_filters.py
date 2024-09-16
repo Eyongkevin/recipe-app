@@ -15,7 +15,7 @@ def style_difficulty(value):
         'Easy': 'btn-success',
         'Medium': 'btn-warning',
         'Intermediate': 'btn-danger',
-        'Hard': 'btn-primary'
+        'Hard': 'btn-secondary'
     }
 
     return difficulty_classes.get(value, '')

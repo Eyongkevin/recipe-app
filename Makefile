@@ -13,4 +13,4 @@ dev-shell-plus:
 dev-install:
 	pip install -r requirements/dev.txt
 dev-test:
-	python manage.py test --settings=recipe_project.settings.dev
+	python manage.py test --settings=recipe_project.settings.dev --verbosity=2

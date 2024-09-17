@@ -1,7 +1,7 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 from django.urls import reverse
-from .models import Recipe
+from ..models import Recipe
 
 
 class RecipeModelTests(TestCase):

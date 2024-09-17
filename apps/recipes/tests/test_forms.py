@@ -1,5 +1,8 @@
 from django.test import TestCase
-from .forms import RecipeForm, RecipeSearch
+from django.urls import reverse
+from ..forms import RecipeForm, RecipeSearch
+from ..models import Recipe
+
 
 class RecipeSearchFormTest(TestCase):
     def setUp(self):
@@ -14,20 +17,10 @@ class RecipeSearchFormTest(TestCase):
     def test_invalid_search_form(self):
         form = RecipeSearch(data={})
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 2)  # Adjust if the number of fields changes
+        self.assertEqual(len(form.errors), 2)  
 
     def test_search_results(self):
         response = self.client.get(reverse('recipe:search'), {'searching_by': 'name', 'search_term': 'Recipe 1'})
         self.assertContains(response, 'Recipe 1')
         self.assertNotContains(response, 'Recipe 2')
 
-class RecipeSearchFormTest(TestCase):
-    def test_search_form_validity(self):
-        form_data = {'searching_by': 'name', 'search_term': 'Test Recipe'}
-        form = RecipeSearch(data=form_data)
-        self.assertTrue(form.is_valid())
-
-    def test_invalid_search_form(self):
-        form = RecipeSearch(data={})
-        self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 2)  # Number of required fields

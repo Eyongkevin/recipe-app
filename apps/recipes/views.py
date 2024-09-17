@@ -26,7 +26,7 @@ class RecipeListView(ListView):
     paginate_by = 3
 
     def get(self, request):
-        recipes = Recipe.objects.all()
+        recipes = Recipe.objects.all().order_by('name')
         page_obj = paginate_queryset(request, recipes, self.paginate_by)
         context = {
             'recipes': page_obj.object_list,
@@ -41,12 +41,16 @@ class RecipeDetailView(DetailView):
 
 @login_required
 def add_recipe(request):
-
-    form = RecipeForm(request.POST, request.FILES)  
-    recipe = form.save(commit=False)
-    recipe.save()
-
-    return redirect('recipe:recipe_list')
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.save()
+            return redirect('recipe:recipe_list')
+    else:
+        form = RecipeForm()
+    
+    return render(request, 'recipes/add_recipe.html', {'form': form})
 
 def search_view(request):
     results = []
@@ -76,11 +80,11 @@ def search_view(request):
             cooking_time = int(search_term)
             results = Recipe.objects.filter(cooking_time=cooking_time).order_by('name')
         except ValueError:
-            results = []  # In case the cooking time is not a valid integer
+            results = []  
 
     
     # Paginate results
-    paginator = Paginator(results, 2)  # Set paginate_by to 2
+    paginator = Paginator(results, 3)  
     page_obj = paginator.get_page(page_number)
     
     print(paginator, page_obj)
@@ -96,8 +100,7 @@ def search_view(request):
         df = df[['name', 'ingredients', 'cooking_time', 'difficulty']]
 
         # Convert to HTML table with styling options
-        df = df.to_html(
-            
+        df = df.to_html( 
             classes='table table-striped table-hover bg-transparent text-light',
             index=False,  # Hide the index column
             justify='start',  # Center-align the table content
@@ -133,7 +136,6 @@ def chart_view(request):
         'line_chart': line_chart
     }
     return render(request, 'recipes/recipe_charts.html', context)
-
 
 # # Helper functions
 # create clickable links for the recipe name

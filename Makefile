@@ -21,9 +21,9 @@ dev-check:
 prod-install:
 	pip install -r requirements/prod.txt
 prod-migrate:
-	python3 manage.py migrate --settings=recipe_project.settings.prod
+	python manage.py migrate --settings=recipe_project.settings.prod
 prod-superuser:
-	python3 manage.py createsuperuser --settings=recipe_project.settings.prod
+	python manage.py createsuperuser --settings=recipe_project.settings.prod
 prod-gunicorn:
 	gunicorn recipe_project.wsgi --env DJANGO_SETTINGS_MODULE=recipe_project.settings.prod
 prod-collectstatic:

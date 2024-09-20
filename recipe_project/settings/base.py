@@ -1,4 +1,6 @@
 from pathlib import Path
+import os
+import dj_database_url
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -10,6 +12,7 @@ DEFAULT_APP = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    'whitenoise.runserver_nostatic',
     "django.contrib.staticfiles",
 ]
 CREATED_APP = ['apps.recipes', 'apps.auth'] 
@@ -26,6 +29,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "recipe_project.urls"
@@ -78,6 +82,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [str(BASE_DIR / "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MARKDOWNIFY = {
@@ -95,3 +101,7 @@ MARKDOWNIFY = {
 LOGIN_URL='/login/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DATABASES = {
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+}

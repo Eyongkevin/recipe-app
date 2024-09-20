@@ -14,3 +14,5 @@ dev-install:
 	pip install -r requirements/dev.txt
 dev-test:
 	python manage.py test --settings=recipe_project.settings.dev --verbosity=2
+dev-collectstatic:
+	python manage.py collectstatic --noinput --settings=recipe_project.settings.dev

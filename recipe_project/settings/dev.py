@@ -33,8 +33,14 @@ INSTALLED_APPS = INSTALLED_APPS + THIRD_PARTY_APP
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
+
+
+
+
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+

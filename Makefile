@@ -16,3 +16,15 @@ dev-test:
 	python manage.py test --settings=recipe_project.settings.dev --verbosity=2
 dev-check:
 	python manage.py check --deploy --settings=recipe_project.settings.dev
+
+# Production
+prod-install:
+	pip install -r requirements/prod.txt
+prod-migrate:
+	python3 manage.py migrate --settings=config.settings.prod
+prod-superuser:
+	python3 manage.py createsuperuser --settings=config.settings.prod
+prod-gunicorn:
+	gunicorn config.wsgi --env DJANGO_SETTINGS_MODULE=config.settings.prod
+prod-collectstatic:
+	python manage.py collectstatic --settings=config.settings.prod

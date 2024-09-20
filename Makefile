@@ -28,3 +28,8 @@ prod-gunicorn:
 	gunicorn recipe_project.wsgi --env DJANGO_SETTINGS_MODULE=recipe_project.settings.prod
 prod-collectstatic:
 	python manage.py collectstatic --settings=recipe_project.settings.prod
+
+
+# Export Project Structure
+struct:
+	tree /F /A > structure.txt

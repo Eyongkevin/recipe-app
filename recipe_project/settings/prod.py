@@ -8,12 +8,12 @@ environ.Env.read_env(str(BASE_DIR / ".env"))
 SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
-ALLOWED_HOSTS = ["recipe-app-production-7591.up.railway.app"]
-CSRF_TRUSTED_ORIGINS = [
-        "https://recipe-app-production-7591.up.railway.app"
-]  # modify later
+ALLOWED_HOSTS = ["*"]
+# CSRF_TRUSTED_ORIGINS = [
+#         "https://recipe-app-production-7591.up.railway.app"
+# ]  # modify later
 
-MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
 # DATABASES = {
 #     "default": {
@@ -28,15 +28,17 @@ MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
 
 # If you want to use sqlite3 instead, then uncomment this and comment the above.
 
-#DATABASES = {
+# DATABASES = {
 #    "default": {
 #        "ENGINE": "django.db.backends.sqlite3",
 #        "NAME": BASE_DIR / "db.sqlite3",
 #    }
-#}
+# }
 
 STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATICFILES_DIRS = (str(BASE_DIR / "static"),)
+
+STATICSTORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Connect to our database remotely
 import dj_database_url

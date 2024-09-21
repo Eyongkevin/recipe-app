@@ -27,7 +27,7 @@ prod-migrate:
 prod-superuser:
 	python manage.py createsuperuser --settings=recipe_project.settings.prod
 prod-gunicorn:
-	gunicorn recipe_project.wsgi --env DJANGO_SETTINGS_MODULE=recipe_project.settings.prod -c recipe_project/prod.py
+	gunicorn --env DJANGO_SETTINGS_MODULE=recipe_project.settings.prod -c recipe_project.wsgi
 prod-collectstatic:
 	python manage.py collectstatic --settings=recipe_project.settings.prod
 

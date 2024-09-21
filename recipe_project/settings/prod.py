@@ -8,10 +8,10 @@ environ.Env.read_env(str(BASE_DIR / ".env"))
 SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
-ALLOWED_HOSTS = ["*"]
-# CSRF_TRUSTED_ORIGINS = [
-#         "https://recipe-app-production-7591.up.railway.app"
-# ]  # modify later
+ALLOWED_HOSTS = ["recipe-app-production-2b43.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://recipe-app-production-2b43.up.railway.app"
+]  # modify later
 
 MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 

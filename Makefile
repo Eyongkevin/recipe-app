@@ -24,6 +24,9 @@ prod-install:
 	pip install -r requirements/prod.txt
 prod-migrate:
 	python manage.py migrate --settings=recipe_project.settings.prod
+
+prod-mm:
+	python manage.py makemigrations --settings=recipe_project.settings.prod
 prod-superuser:
 	python manage.py createsuperuser --settings=recipe_project.settings.prod
 prod-gunicorn:

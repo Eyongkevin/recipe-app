@@ -18,6 +18,8 @@ dev-check:
 	python manage.py check --deploy --settings=recipe_project.settings.dev
 
 # Production
+prod-start:
+	python manage.py runserver --settings=recipe_project.settings.prod
 prod-install:
 	pip install -r requirements/prod.txt
 prod-migrate:

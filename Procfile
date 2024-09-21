@@ -1,1 +1,1 @@
-web: make prod-migrate && make prod-gunicorn
+web: make prod-migrate && make prod-start
